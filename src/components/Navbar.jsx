@@ -24,7 +24,7 @@ function Navbar() {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link text-dark" to="/">Movies</Link>
+            <Link className="nav-link text-dark custom-nav-link" to="/">Movies</Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link text-dark" to="/watchlist">Watchlist</Link>
