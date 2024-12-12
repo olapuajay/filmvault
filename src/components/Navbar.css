@@ -1,15 +1,5 @@
-.navbar-nav .nav-item {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
 .custom-nav-link {
-  text-decoration: none;
-  color: black;
-  transition: color 0.3s ease;
-}
-
-.custom-nav-link:hover {
-  color: #007bff; /* Blue color on hover */
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight:bolder;
+  font-size: 1rem;
 }
