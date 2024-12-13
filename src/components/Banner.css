@@ -1,0 +1,17 @@
+.banner {
+  background-image: url('https://i0.wp.com/jasonsmovieblog.com/wp-content/uploads/2019/03/avengers-endgame-dc-comics-movie-2019_3840x2160_easy-resize.com_-e1552581872397.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 75vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.banner-content {
+  color: white;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.411);
+  padding: 15px;
+}
