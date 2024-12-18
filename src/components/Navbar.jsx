@@ -1,38 +1,27 @@
 import React from "react";
 import Movielogo from "../assets/movielogo.png";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
 
 function Navbar() {
+  const navbarStyle = {
+    fontFamily: `Georgia, 'Times New Roman', Times, serif`,
+    fontWeight: 'bold',
+    fontSize: '1rem',
+  }
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light px-3 d-flex gap-3">
       <Link className="navbar-brand" to="/">
         <img src={Movielogo} alt="LOGO" style={{ height: 40, width: 40 }} />
       </Link>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link className="nav-link text-dark custom-nav-link" to="/">
-              Movies
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-dark custom-nav-link" to="/watchlist">
-              Watchlist
-            </Link>
-          </li>
-        </ul>
+      <div className="nav-item">
+        <Link className="nav-link text-dark custom-nav-link" to="/" style={navbarStyle}>
+          Movies
+        </Link>
+      </div>
+      <div className="nav-item">
+        <Link className="nav-link text-dark custom-nav-link" to="/watchlist" style={navbarStyle}>
+          Watchlist
+        </Link>
       </div>
     </nav>
   );
