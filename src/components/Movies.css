@@ -5,10 +5,3 @@
 .movie-card:hover {
   transform: scale(1.05);
 }
-
-.movie-container{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
