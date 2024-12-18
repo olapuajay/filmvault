@@ -6,6 +6,19 @@ import Pagination from "./Pagination";
 
 function Movies() {
   const [movies, setMovies] = useState([])
+  const [pageNumber, setPageNumber] = useState(1)
+
+  const handlePagePrev = () => {
+    if(pageNumber === 1) {
+      setPageNumber(1)
+    } else {
+      setPageNumber(pageNumber - 1)
+    }
+  }
+
+  const handlePageNext = () => {
+    setPageNumber(pageNumber + 1)
+  }
   useEffect(() => {
     axios
       .get(
@@ -32,7 +45,7 @@ function Movies() {
           })
         }
       </div>
-      <Pagination />
+      <Pagination pageNumber={pageNumber} handlePagePrev={handlePagePrev} handlePageNext={handlePageNext} />
     </>
   );
 }
