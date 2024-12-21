@@ -1,6 +1,6 @@
 import React from 'react'
 
-function WatchList() {
+function WatchList({watchlist}) {
   return (
     <>
       <h3 className='text-center fw-bold text-uppercase mt-3'>Watch List</h3>
@@ -22,17 +22,20 @@ function WatchList() {
             </tr>
           </thead>
           <tbody>
-            <tr className='align-middle'>
-              <td>
-                <img src={`https://www.movieposters.com/cdn/shop/products/c104f1bfed20481f35bc96cb9addc940_240x360_crop_center.progressive.jpg?v=1573588574`} alt="Movie Poster" style={{width: '3rem'}} />
-                <p className='d-inline mx-4'>Titanic</p>
-              </td>
-              <td>8.8</td>
-              <td>10</td>
-              <td>Adventure</td>
-              <td className='text-danger'>Delete</td>
-            </tr>
-            
+            {
+              watchlist.map((movieObj) => {
+                return <tr className='align-middle'>
+                  <td>
+                    <img src={`https://image.tmdb.org/t/p/original/${movieObj.poster_path}`} alt="Movie Poster" style={{width: '3rem'}} />
+                    <p className='d-inline mx-4'> {movieObj.title} </p>
+                  </td>
+                  <td> {movieObj.vote_average} </td>
+                  <td> {movieObj.popularity} </td>
+                  <td>Adventure</td>
+                  <td className='text-danger'>Delete</td>
+                </tr>
+              })
+            }
           </tbody>
         </table>
       </div>
