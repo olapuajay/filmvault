@@ -39,7 +39,7 @@ function WatchList({watchlist, setWatchlist}) {
           <thead>
             <tr>
               <th>Name</th>
-              <th className='d-flex justify-content-between'>
+              <th className='d-flex justify-content-center gap-2'>
                 <div onClick={sortDecrease}> <FontAwesomeIcon icon={faArrowUp} /> </div>
                 <div>Ratings</div>
                 <div onClick={sortIncrease}> <FontAwesomeIcon icon={faArrowDown} /> </div>
@@ -58,8 +58,8 @@ function WatchList({watchlist, setWatchlist}) {
                     <img src={`https://image.tmdb.org/t/p/original/${movieObj.poster_path}`} alt="Movie Poster" style={{width: '3rem'}} />
                     <p className='d-inline mx-4'> {movieObj.title} </p>
                   </td>
-                  <td> {movieObj.vote_average} </td>
-                  <td> {movieObj.popularity} </td>
+                  <td className='text-center'> {movieObj.vote_average} </td>
+                  <td className='text-center'> {movieObj.popularity} </td>
                   <td>Adventure</td>
                   <td className='text-danger'>
                     <FontAwesomeIcon icon={faTrash} />
