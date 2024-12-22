@@ -39,7 +39,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={ <> <Banner /> <Movies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} /></> } />
-          <Route path='/watchlist' element={ <WatchList watchlist={watchlist} />} />
+          <Route path='/watchlist' element={ <WatchList watchlist={watchlist} setWatchlist={setWatchlist} />} />
         </Routes>
       </BrowserRouter>
     </>

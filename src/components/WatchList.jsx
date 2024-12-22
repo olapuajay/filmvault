@@ -4,11 +4,26 @@ import { faArrowDown, faT } from '@fortawesome/free-solid-svg-icons'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-function WatchList({watchlist}) {
+function WatchList({watchlist, setWatchlist}) {
   const [search, setSearch] = useState('')
   const handleSearch = (e) => {
     setSearch(e.target.value)
   }
+
+  const sortIncrease = () => {
+    const sortedIncreasing = watchlist.sort((movieA, movieB) => {
+      return movieA.vote_average - movieB.vote_average
+    })
+    setWatchlist([...sortedIncreasing])
+  }
+
+  const sortDecrease = () => {
+    const sortedDecreasing = watchlist.sort((movieA, movieB) => {
+      return movieB.vote_average - movieA.vote_average
+    })
+    setWatchlist([...sortedDecreasing])
+  }
+
   return (
     <div className='container mt-4'>
       <h3 className='text-center fw-bold text-uppercase mt-3'>Watch List</h3>
@@ -25,9 +40,9 @@ function WatchList({watchlist}) {
             <tr>
               <th>Name</th>
               <th className='d-flex justify-content-between'>
-                <div> <FontAwesomeIcon icon={faArrowUp} /> </div>
+                <div onClick={sortDecrease}> <FontAwesomeIcon icon={faArrowUp} /> </div>
                 <div>Ratings</div>
-                <div> <FontAwesomeIcon icon={faArrowDown} /> </div>
+                <div onClick={sortIncrease}> <FontAwesomeIcon icon={faArrowDown} /> </div>
               </th>
               <th>Popularity</th>
               <th>Genre</th>
