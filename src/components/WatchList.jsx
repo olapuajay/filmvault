@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown, faT } from '@fortawesome/free-solid-svg-icons'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import genreIds from '../utility/genre'
 
 function WatchList({watchlist, setWatchlist}) {
   const [search, setSearch] = useState('')
+  const [genreList, setGenreList] = useState(['All Genres'])
+  const [currGenre, setCurrGenre] = useState('All Genres')
+
   const handleSearch = (e) => {
     setSearch(e.target.value)
+  }
+
+  const handleFilter = (genre) => {
+    setCurrGenre(genre)
   }
 
   const sortIncrease = () => {
@@ -24,12 +32,24 @@ function WatchList({watchlist, setWatchlist}) {
     setWatchlist([...sortedDecreasing])
   }
 
+  useEffect(() => {
+    let temp = watchlist.map((movieObj) => {
+      return genreIds[movieObj.genre_ids[0]]
+    })
+    temp = new Set(temp)
+    setGenreList(['All Genres', ...temp])
+    console.log(temp)
+  }, [watchlist])
+
   return (
     <div className='container mt-4'>
       <h3 className='text-center fw-bold text-uppercase mt-3'>Watch List</h3>
       <div className='container mt-4 d-flex justify-content-center gap-4'>
-        <button className='btn btn-primary'> Action </button>
-        <button className='btn btn-light'> Adventure </button>
+        {
+          genreList.map((genre) => {
+            return <button onClick={() => handleFilter(genre)} className={currGenre === genre ? 'btn btn-primary' : 'btn btn-light'}> {genre} </button>
+          })
+        }
       </div>
       <div className="form-group text-center mx-auto mt-4 mb-4">
         <input onChange={handleSearch} value={search} type="text" className='form-control text-dark' placeholder='Search Movies' />
@@ -60,7 +80,7 @@ function WatchList({watchlist, setWatchlist}) {
                   </td>
                   <td className='text-center'> {movieObj.vote_average} </td>
                   <td className='text-center'> {movieObj.popularity} </td>
-                  <td>Adventure</td>
+                  <td> {genreIds[movieObj.genre_ids[0]]} </td>
                   <td className='text-danger'>
                     <FontAwesomeIcon icon={faTrash} />
                   </td>

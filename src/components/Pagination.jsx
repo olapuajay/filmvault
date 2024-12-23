@@ -9,7 +9,7 @@ function Pagination( { handlePagePrev, handlePageNext, pageNumber } ) {
       <div onClick={handlePagePrev} className='btn btn-outline-dark border border-dark p-2 rounded-circle' style={{width: '40px', height: '40px'}}>
         <FontAwesomeIcon icon={faChevronLeft} />
         </div>
-      <div> {pageNumber} </div>
+      <div style={{fontSize: '1.5rem'}}> {pageNumber} </div>
       <div onClick={handlePageNext} className='btn btn-outline-dark border border-dark p-2 rounded-circle' style={{width: '40px', height: '40px'}}>
         <FontAwesomeIcon icon={faChevronRight} />
       </div>

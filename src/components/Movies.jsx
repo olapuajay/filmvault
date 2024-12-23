@@ -33,11 +33,11 @@ function Movies({handleAddToWatchlist, handleRemoveFromWatchlist, watchlist}) {
       <div className="p-4">
         <h5 className="text-dark text-center fw-bold">Trending Movies</h5>
       </div>
-      <div className="movie-container row justify-content-center mx-auto mb-4">
+      <div className="movie-container row mx-auto mb-4">
         {movies.map((movieObj) => {
           return (
             <>
-              <div className="col-6 col-md-6 col-lg-2 col-sm-3 mb-2">
+              <div className="col-lg-1-5 col-md-2 col-sm-4">
                 <MovieCard
                   key={movieObj.id}
                   movieObj={movieObj}
