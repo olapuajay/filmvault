@@ -5,7 +5,7 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import genreIds from '../utility/genre'
 
-function WatchList({watchlist, setWatchlist}) {
+function WatchList({watchlist, setWatchlist, handleRemoveFromWatchlist}) {
   const [search, setSearch] = useState('')
   const [genreList, setGenreList] = useState(['All Genres'])
   const [currGenre, setCurrGenre] = useState('All Genres')
@@ -71,6 +71,12 @@ function WatchList({watchlist, setWatchlist}) {
           <tbody>
             {
               watchlist.filter((movieObj) => {
+                if(currGenre == 'All Genres') {
+                  return true
+                } else {
+                  return genreIds[movieObj.genre_ids[0]] == currGenre
+                }
+              }).filter((movieObj) => {
                 return movieObj.title.toLowerCase().includes(search.toLowerCase())
               }).map((movieObj) => {
                 return <tr className='align-middle'>
@@ -81,7 +87,7 @@ function WatchList({watchlist, setWatchlist}) {
                   <td className='text-center'> {movieObj.vote_average} </td>
                   <td className='text-center'> {movieObj.popularity} </td>
                   <td> {genreIds[movieObj.genre_ids[0]]} </td>
-                  <td className='text-danger'>
+                  <td onClick={() => handleRemoveFromWatchlist(movieObj)} className='text-danger' style={{cursor: 'pointer'}}>
                     <FontAwesomeIcon icon={faTrash} />
                   </td>
                 </tr>

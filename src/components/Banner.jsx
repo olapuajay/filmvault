@@ -4,7 +4,7 @@ import "./Banner.css";
 function Banner() {
   return (
     <div className="banner">
-      <p className="banner-content text-center">Avengers: Endgame</p>
+      <p className="banner-content text-center">Captain America: The Winter Soldier</p>
     </div>
   );
 }
