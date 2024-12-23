@@ -1,5 +1,4 @@
 import React from "react";
-import './Movies.css'
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -38,7 +37,7 @@ function Movies({handleAddToWatchlist, handleRemoveFromWatchlist, watchlist}) {
         {movies.map((movieObj) => {
           return (
             <>
-              <div className="col-6 col-md-3 col-lg-1-5 mb-4">
+              <div className="col-6 col-md-2 mb-4 ">
                 <MovieCard
                   key={movieObj.id}
                   movieObj={movieObj}
