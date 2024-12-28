@@ -35,7 +35,7 @@ function Movies({
   }, [pageNumber]);
   return (
     <>
-      <div className="p-4">
+      <div className="py-4">
         <h5 className="text-dark text-center fw-bold">Trending Movies</h5>
       </div>
       <div className="movie-container row mb-4">
