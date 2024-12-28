@@ -68,7 +68,7 @@ function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
           placeholder="Search Movies"
         />
       </div>
-      <div className="container mt-4">
+      <div className="container mt-4 table-responsive">
         <table className="table table-striped table-hover container-fluid">
           <thead>
             <tr>
