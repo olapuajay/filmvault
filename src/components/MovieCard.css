@@ -1,8 +1,8 @@
 .movie-card {
   background-size: cover;
   background-position: center;
-  height: 30vh;
-  width: 120px;
+  height: 25vh;
+  width: 100px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
   display: flex;
@@ -10,6 +10,13 @@
   align-items: flex-end;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 425px) {
+  .movie-card {
+    height: 25vh;
+    width: 90px;
+  }
 }
 
 .movie-card:hover {

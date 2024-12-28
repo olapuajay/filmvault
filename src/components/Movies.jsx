@@ -1,10 +1,15 @@
 import React from "react";
 import MovieCard from "./MovieCard";
+import "./Movies.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "./Pagination";
 
-function Movies({handleAddToWatchlist, handleRemoveFromWatchlist, watchlist}) {
+function Movies({
+  handleAddToWatchlist,
+  handleRemoveFromWatchlist,
+  watchlist,
+}) {
   const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -33,24 +38,19 @@ function Movies({handleAddToWatchlist, handleRemoveFromWatchlist, watchlist}) {
       <div className="p-4">
         <h5 className="text-dark text-center fw-bold">Trending Movies</h5>
       </div>
-      <div className="movie-container row mx-auto mb-4">
-        {movies.map((movieObj) => {
-          return (
-            <>
-              <div className="col-6 col-md-2 mb-4 ">
-                <MovieCard
-                  key={movieObj.id}
-                  movieObj={movieObj}
-                  poster_path={movieObj.poster_path}
-                  name={movieObj.original_title}
-                  handleAddToWatchlist={handleAddToWatchlist}
-                  handleRemoveFromWatchlist={handleRemoveFromWatchlist}
-                  watchlist={watchlist}
-                />
-              </div>
-            </>
-          );
-        })}
+      <div className="movie-container row mb-4">
+        {movies.map((movieObj) => (
+          <div key={movieObj.id} className="col-4 col-md-2 mb-4 col-lg-custom">
+            <MovieCard
+              movieObj={movieObj}
+              poster_path={movieObj.poster_path}
+              name={movieObj.original_title}
+              handleAddToWatchlist={handleAddToWatchlist}
+              handleRemoveFromWatchlist={handleRemoveFromWatchlist}
+              watchlist={watchlist}
+            />
+          </div>
+        ))}
       </div>
       <Pagination
         pageNumber={pageNumber}
