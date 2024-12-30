@@ -52,6 +52,7 @@ function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
               className={
                 currGenre === genre ? "btn btn-primary" : "btn btn-light"
               }
+              style={{fontSize: '0.7rem'}}
             >
               {" "}
               {genre}{" "}

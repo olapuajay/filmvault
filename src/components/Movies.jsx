@@ -1,6 +1,5 @@
 import React from "react";
 import MovieCard from "./MovieCard";
-import "./Movies.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "./Pagination";
@@ -38,9 +37,9 @@ function Movies({
       <div className="py-4">
         <h5 className="text-dark text-center fw-bold">Trending Movies</h5>
       </div>
-      <div className="movie-container row mb-4">
+      <div className="movie-container container-fluid d-flex flex-wrap justify-content-around">
         {movies.map((movieObj) => (
-          <div key={movieObj.id} className="col-4 col-md-2 mb-4 col-lg-custom">
+          <div key={movieObj.id} className="mb-4">
             <MovieCard
               movieObj={movieObj}
               poster_path={movieObj.poster_path}
