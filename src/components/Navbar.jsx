@@ -6,7 +6,7 @@ function Navbar() {
   const navbarStyle = {
   }
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light px-3 d-flex justify-content-start align-items-center gap-4">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light px-3 py-1 d-flex justify-content-start align-items-center gap-4">
       <Link className="navbar-brand" to="/">
         <img src={Movielogo} alt="LOGO" style={{ height: 40, width: 40 }} />
       </Link>
