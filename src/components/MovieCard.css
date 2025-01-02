@@ -12,12 +12,7 @@
   transition: transform 0.3s ease-in-out;
 }
 
-@media screen and (max-width: 425px) {
-  .movie-card {
-    height: 25vh;
-    width: 90px;
-  }
-}
+
 
 .movie-card:hover {
   transform: scale(1.1);
