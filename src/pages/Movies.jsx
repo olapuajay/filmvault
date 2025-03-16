@@ -61,6 +61,3 @@ function Movies({
 }
 
 export default Movies;
-
-// https://api.themoviedb.org/3/movie/popular?api_key=046fe2fc2837b61daa04eff77cc7f888&language=en-US&page=1
-// 046fe2fc2837b61daa04eff77cc7f888
