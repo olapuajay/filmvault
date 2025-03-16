@@ -1,5 +1,5 @@
+import { PlusIcon, X } from "lucide-react";
 import React from "react";
-import './MovieCard.css'
 
 function MovieCard({ movieObj, poster_path, name, handleAddToWatchlist, handleRemoveFromWatchlist, watchlist }) {
 
@@ -14,22 +14,23 @@ function MovieCard({ movieObj, poster_path, name, handleAddToWatchlist, handleRe
 
   return (
     <>
-      <div className="container">
-        <div className="movie-card mb-2 position-relative" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${poster_path})`}}>
-          <div
-            className="text-light text-center p-2 text-truncate movie-card-title"
-          >
-            {name}
-          </div>
+      <div className="">
+        <div className="movie-card relative rounded-lg overflow-hidden md:h-40 md:w-24 bg-cover bg-center h-32 w-20 hover:scale-105 transition-transform duration-300" 
+        style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${poster_path})`}}>
           {
             doesExist(movieObj) ? (
-              <button onClick={() => handleRemoveFromWatchlist(movieObj)} className="btn btn-dark
-               d-flex justify-content-center align-items-center position-absolute" style={{top: "10px",right: "10px",zIndex: "10",height: "1.5rem",width: "1.5rem",}}>❌</button>
+              <button onClick={() => handleRemoveFromWatchlist(movieObj)} className="flex justify-center items-center absolute top-0 right-0 text-red-600 bg-gray-800 p-1 rounded-bl-lg">
+                <X />
+              </button>
             ) : (
-              <button onClick={() => handleAddToWatchlist(movieObj)} className="btn btn-dark d-flex justify-content-center align-items-center position-absolute" style={{top: "10px",right: "10px",zIndex: "10",height: "1.5rem",width: "1.5rem",}}>🤩</button>
+              <button onClick={() => handleAddToWatchlist(movieObj)} className="flex justify-center items-center absolute top-0 right-0 text-sky-600 bg-gray-800 p-1 rounded-bl-lg">
+                <PlusIcon />
+              </button>
             )
           }
-
+        </div>
+        <div className="text-white md:text-sm text-xs px-2 pt-2 flex justify-items-start">
+          {name.length > 10 ? name.slice(0, 10) + "..." : name}
         </div>
       </div>
     </>

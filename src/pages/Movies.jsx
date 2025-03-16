@@ -35,9 +35,9 @@ function Movies({
   return (
     <>
       <div className="py-4">
-        <h5 className="text-dark text-center fw-bold">Trending Movies</h5>
+        <h5 className="text-white font-semibold text-xl text-center">Trending Movies</h5>
       </div>
-      <div className="movie-container container-fluid d-flex flex-wrap justify-content-around">
+      <div className="grid lg:grid-cols-8 md:grid-cols-6 grid-cols-3 gap-2 lg:gap-4 p-4 place-items-center">
         {movies.map((movieObj) => (
           <div key={movieObj.id} className="mb-4">
             <MovieCard
