@@ -11,6 +11,7 @@ function Movies({
 }) {
   const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+  const API_KEY = import.meta.env.VITE_API_KEY;
 
   const handlePagePrev = () => {
     if (pageNumber === 1) {
@@ -26,7 +27,7 @@ function Movies({
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=046fe2fc2837b61daa04eff77cc7f888&language=en-US&page=${pageNumber}`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`
       )
       .then((res) => {
         setMovies(res.data.results);
@@ -34,7 +35,7 @@ function Movies({
   }, [pageNumber]);
   return (
     <>
-      <div className="py-4">
+      <div className="mt-8">
         <h5 className="text-white font-semibold text-xl text-center">Trending Movies</h5>
       </div>
       <div className="grid lg:grid-cols-8 md:grid-cols-6 grid-cols-3 gap-2 lg:gap-4 p-4 place-items-center">
