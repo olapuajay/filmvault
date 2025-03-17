@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import genreIds from "../utility/genre";
+import { ArrowDown, ArrowUp, Trash } from "lucide-react";
 
 function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
   const [search, setSearch] = useState("");
@@ -41,17 +38,17 @@ function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
   }, [watchlist]);
 
   return (
-    <div className="container mt-4">
-      <h3 className="text-center fw-bold text-uppercase mt-3">Watch List</h3>
-      <div className="container mt-4 d-flex justify-content-center gap-4">
-        {genreList.map((genre) => {
+    <div className="mt-16">
+      <h3 className="text-center text-white text-xl font-bold">Watch List</h3>
+      <div className="mt-4 flex justify-center gap-4">
+        {genreList.map((genre, index) => {
           return (
             <button
+              key={index}
               onClick={() => handleFilter(genre)}
               className={
-                currGenre === genre ? "btn btn-primary" : "btn btn-light"
+                currGenre === genre ? "bg-sky-400 px-4 py-2 rounded-lg text-sm text-white font-semibold" : "bg-gray-800 py-2 px-4 rounded-lg text-sm text-white"
               }
-              style={{fontSize: '0.7rem'}}
             >
               {" "}
               {genre}{" "}
@@ -59,29 +56,32 @@ function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
           );
         })}
       </div>
-      <div className="form-group text-center mx-auto mt-4 mb-4">
+      <div className="text-center mx-auto my-4">
         <input
           onChange={handleSearch}
           value={search}
           type="text"
-          className="form-control text-dark"
+          className="p-2 rounded-lg md:w-1/2 border-2 border-gray-300 bg-gray-800 text-white active:outline-none focus:outline-none"
           placeholder="Search Movies"
         />
       </div>
-      <div className="container mt-4 table-responsive">
-        <table className="table table-striped table-hover container-fluid">
+      <div>
+        {watchlist.length === 0 && (
+          <div className="text-center text-gray-300 text-lg">No Movies in Watchlist</div> 
+        )}
+      </div>
+      <div className="mx-auto my-4">
+        <table className="table-auto text-white mx-auto w-3/4">
           <thead>
             <tr>
               <th>Name</th>
-              <th className="d-flex justify-content-center gap-2">
+              <th className="flex justify-center items-center gap-2">
                 <div onClick={sortDecrease}>
-                  {" "}
-                  <FontAwesomeIcon icon={faArrowUp} />{" "}
+                  <ArrowUp size={20} />
                 </div>
                 <div>Ratings</div>
                 <div onClick={sortIncrease}>
-                  {" "}
-                  <FontAwesomeIcon icon={faArrowDown} />{" "}
+                  <ArrowDown size={20} />
                 </div>
               </th>
               <th>Popularity</th>
@@ -104,24 +104,23 @@ function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
               })
               .map((movieObj) => {
                 return (
-                  <tr className="align-middle">
-                    <td>
+                  <tr className="border-b-2 border-gray-800 py-2">
+                    <td className="flex items-center gap-2 my-2">
                       <img
                         src={`https://image.tmdb.org/t/p/original/${movieObj.poster_path}`}
                         alt="Movie Poster"
-                        style={{ width: "3rem" }}
+                        className="w-16 h-24 rounded-lg"
                       />
-                      <p className="d-inline mx-4"> {movieObj.title} </p>
+                      <p className="text-gray-300"> {movieObj.title} </p>
                     </td>
-                    <td className="text-center"> {movieObj.vote_average} </td>
-                    <td className="text-center"> {movieObj.popularity} </td>
-                    <td> {genreIds[movieObj.genre_ids[0]]} </td>
+                    <td className="text-center text-gray-300"> {movieObj.vote_average} </td>
+                    <td className="text-center text-gray-300"> {movieObj.popularity} </td>
+                    <td className="text-center text-gray-300"> {genreIds[movieObj.genre_ids[0]]} </td>
                     <td
                       onClick={() => handleRemoveFromWatchlist(movieObj)}
-                      className="text-danger"
-                      style={{ cursor: "pointer" }}
+                      className="text-red-500 cursor-pointer"
                     >
-                      <FontAwesomeIcon icon={faTrash} />
+                      <Trash size={20} />
                     </td>
                   </tr>
                 );
