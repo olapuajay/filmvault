@@ -1,7 +1,6 @@
 import React from "react";
 import MovieCard from "../components/MovieCard";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import Pagination from "../components/Pagination";
 import useFetch from "../hooks/useFetch";
 
@@ -10,7 +9,6 @@ function Movies({
   handleRemoveFromWatchlist,
   watchlist,
 }) {
-  const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -25,15 +23,11 @@ function Movies({
   const handlePageNext = () => {
     setPageNumber(pageNumber + 1);
   };
-  useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`
-      )
-      .then((res) => {
-        setMovies(res.data.results);
-      });
-  }, [pageNumber]);
+
+  const { data: movies, loading, error } = useFetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`);
+  if(loading) return <p className='text-white text-center'>Loading...</p>
+  if(error) return <p className='text-red-500 text-center'>{error}</p>
+  
   return (
     <>
       <div className="mt-8 p-2">
