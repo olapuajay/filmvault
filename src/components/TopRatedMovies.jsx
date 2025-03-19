@@ -1,28 +1,22 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import MovieCard from './MovieCard';
+import TopRatedMovieCard from './TopRatedMovieCard';
+import useFetch from '../hooks/useFetch';
 
 function TopRatedMovies({  handleAddToWatchlist, handleRemoveFromWatchlist, watchlist }) {
-  const [movies, setMovies] = useState([]);
+  const API_KEY = import.meta.env.VITE_API_KEY;
+  const { data: movies, loading, error } = useFetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`);
 
-  useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_API_KEY}&language=en-US&page=1`)
-    .then((res) => {
-      setMovies(res.data.results)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }, []);
+  if(loading) return <p className='text-white text-center'>Loading...</p>
+  if(error) return <p className='text-red-500 text-center'>{error}</p>
 
   return (
-    <section id='toprated' className='mt-8 p-4'>
-      <h3 className='text-white font-semibold text-xl text-center'>Top Rated Movies</h3>
+    <section id='toprated' className='mt-8 p-2'>
+      <h3 className='text-white font-semibold md:text-xl text-lg text-left'>Top Rated Movies</h3>
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={20}
@@ -41,7 +35,7 @@ function TopRatedMovies({  handleAddToWatchlist, handleRemoveFromWatchlist, watc
       >
         {movies.map((movie) => (
           <SwiperSlide key={movie.id}>
-            <MovieCard
+            <TopRatedMovieCard
               movieObj={movie}
               poster_path={movie.poster_path}
               name={movie.original_title}

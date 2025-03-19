@@ -3,6 +3,7 @@ import MovieCard from "../components/MovieCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "../components/Pagination";
+import useFetch from "../hooks/useFetch";
 
 function Movies({
   handleAddToWatchlist,
@@ -35,8 +36,8 @@ function Movies({
   }, [pageNumber]);
   return (
     <>
-      <div className="mt-8">
-        <h5 className="text-white font-semibold text-xl text-center">Trending Movies</h5>
+      <div className="mt-8 p-2">
+        <h5 className="text-white font-semibold md:text-xl text-lg text-left">Trending Movies</h5>
       </div>
       <div className="grid lg:grid-cols-8 md:grid-cols-6 grid-cols-3 gap-2 lg:gap-4 p-4 place-items-center">
         {movies.map((movieObj) => (
