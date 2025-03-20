@@ -15,7 +15,7 @@ function UpcomingMovies({ watchlist, handleAddToWatchlist, handleRemoveFromWatch
   if(error) return <p className='text-red-500 text-center'>{error}</p>
 
   return (
-    <div className='mt-4 p-2'>
+    <div className='mt-2 p-2'>
       <h3 className='text-white font-semibold md:text-xl text-lg text-left'>Upcoming Movies</h3>
       <Swiper
         modules={[Navigation, Autoplay]}

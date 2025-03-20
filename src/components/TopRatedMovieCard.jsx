@@ -14,7 +14,7 @@ function TopRatedMovieCard({ movieObj, poster_path, name, year, handleAddToWatch
   const imageUrl = `https://image.tmdb.org/t/p/w500${poster_path}`
 
   return (
-    <div className='mb-4 py-2'>
+    <div className='py-2'>
       <div className='relative rounded-lg overflow-hidden w-full md:h-[250px] h-[150px] bg-cover bg-center hover:scale-105 transition-transform duration-300' 
         style={{backgroundImage: `url(${imageUrl})`}}>
         {doesExist(movieObj) ? (
@@ -30,7 +30,7 @@ function TopRatedMovieCard({ movieObj, poster_path, name, year, handleAddToWatch
       <div className='text-gray-300 md:text-sm text-xs px-2 pt-2 flex justify-items-start'>
         {name.length > 10 ? name.slice(0, 10) + '...' : name}
       </div>
-      <div className='text-gray-300 md:text-sm text-xs px-2 pt-2 flex justify-items-start'>
+      <div className='text-sky-600 md:text-sm text-xs px-2 pt-2 flex justify-items-start'>
         {year}
       </div>
     </div>

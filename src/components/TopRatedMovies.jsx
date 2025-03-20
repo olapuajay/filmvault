@@ -15,7 +15,7 @@ function TopRatedMovies({  handleAddToWatchlist, handleRemoveFromWatchlist, watc
   if(error) return <p className='text-red-500 text-center'>{error}</p>
 
   return (
-    <section id='toprated' className='mt-4 p-2'>
+    <section id='toprated' className='mt-2 p-2'>
       <h3 className='text-white font-semibold md:text-xl text-lg text-left'>Top Rated Movies</h3>
       <Swiper
         modules={[Navigation, Autoplay]}
