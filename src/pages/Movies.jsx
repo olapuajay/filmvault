@@ -1,8 +1,7 @@
 import React from "react";
 import MovieCard from "../components/MovieCard";
-import { useState } from "react";
-import Pagination from "../components/Pagination";
 import useFetch from "../hooks/useFetch";
+import { Link } from "react-router-dom";
 
 function Movies({
   handleAddToWatchlist,
@@ -33,6 +32,13 @@ function Movies({
             />
           </div>
         ))}
+        <div className="mb-10">
+          <Link to="/popular">
+            <div className="rounded-lg overflow-hidden md:h-40 md:w-24 bg-gray-800 h-32 w-20 hover:scale-105 transition-transform duration-300 flex justify-center items-center">
+              <span className="text-center text-sky-600 text-sm">View More</span>
+            </div>
+          </Link>
+        </div>
       </div>
     </>
   );
