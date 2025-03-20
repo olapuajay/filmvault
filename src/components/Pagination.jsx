@@ -3,7 +3,7 @@ import React from 'react'
 
 function Pagination( { handlePagePrev, handlePageNext, pageNumber } ) {
   return (
-    <div className='flex justify-center items-center gap-4'>
+    <div className='flex justify-center items-center gap-4 mb-4'>
       <button onClick={handlePagePrev} className='bg-gray-800 text-white p-2 mx-2 rounded-full'>
         <ArrowLeft size={24} />
       </button>

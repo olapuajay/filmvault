@@ -19,10 +19,9 @@ function Navbar() {
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex gap-6">
-        <Link className="hover:text-sky-500 transition duration-300" to="/">Popular</Link>
-        <Link className="hover:text-sky-500 transition duration-300" to="/watchlist">Watchlist</Link>
         <Link className="hover:text-sky-500 transition duration-300" to="/">Movies</Link>
-        <a href="#toprated" className="hover:text-sky-500 transition duration-300">Top Rated</a>
+        <Link className="hover:text-sky-500 transition duration-300" to="/popular">Popular</Link>
+        <Link className="hover:text-sky-500 transition duration-300" to="/watchlist">Watchlist</Link>
       </div>
 
       {/* Hamburger Icon for Mobile */}
@@ -39,10 +38,9 @@ function Navbar() {
         <Link to="/">
           <img src={Movielogo} alt="LOGO" className="h-10 w-10" />
         </Link>
-        <Link className="text-gray-300 text-lg" to="/" onClick={handleNav}>Popular</Link>
-        <Link className="text-gray-300 text-lg" to="/watchlist" onClick={handleNav}>Watchlist</Link>
         <Link className="text-gray-300 text-lg" to="/" onClick={handleNav}>Movies</Link>
-        <a href="#toprated" className="text-gray-300 text-lg" onClick={handleNav}>Top Rated</a>
+        <Link className="text-gray-300 text-lg" to="/watchlist" onClick={handleNav}>Watchlist</Link>
+        <Link className="text-gray-300 text-lg" to="/popular" onClick={handleNav}>Popular</Link>
       </div>
     </nav>
   );

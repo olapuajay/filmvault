@@ -6,6 +6,7 @@ import WatchList from "./pages/WatchList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Banner from "./components/Banner";
 import TopRatedMovies from "./components/TopRatedMovies";
+import PopularMovies from "./pages/PopularMovies";
 
 function App() {
   const [watchlist, setWatchlist] = useState([]);
@@ -42,17 +43,13 @@ function App() {
             path="/"
             element={
               <>
-                {" "}
-                <Banner />{" "}
-                <Movies
-                  watchlist={watchlist}
-                  handleAddToWatchlist={handleAddToWatchlist}
-                  handleRemoveFromWatchlist={handleRemoveFromWatchlist}
-                />
+                <Banner />
+                <Movies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
                 <TopRatedMovies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
               </>
             }
           />
+          <Route path="/popular" element={ <PopularMovies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} /> } />
           <Route path="/watchlist" element={ <WatchList watchlist={watchlist} setWatchlist={setWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} /> } />
         </Routes>
       </BrowserRouter>
