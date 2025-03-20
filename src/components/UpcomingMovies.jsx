@@ -4,26 +4,26 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import TopRatedMovieCard from './TopRatedMovieCard';
 import useFetch from '../hooks/useFetch';
+import TopRatedMovieCard from './TopRatedMovieCard';
 
-function TopRatedMovies({  handleAddToWatchlist, handleRemoveFromWatchlist, watchlist }) {
+function UpcomingMovies({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) {
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const { data: movies, loading, error } = useFetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`);
+  const { data: movies, loading, error } = useFetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`);
 
   if(loading) return <p className='text-white text-center'>Loading...</p>
   if(error) return <p className='text-red-500 text-center'>{error}</p>
 
   return (
-    <section id='toprated' className='mt-4 p-2'>
-      <h3 className='text-white font-semibold md:text-xl text-lg text-left'>Top Rated Movies</h3>
+    <div className='mt-4 p-2'>
+      <h3 className='text-white font-semibold md:text-xl text-lg text-left'>Upcoming Movies</h3>
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={20}
         slidesPerView={8}
         slidesPerGroup={4}
         navigation
-        autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true, pauseOnMouseLeave: true}}
+        autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true, pauseOnMouseLeave: true }}
         loop={false}
         breakpoints={{
           1024: { slidesPerView: 8 },
@@ -39,7 +39,7 @@ function TopRatedMovies({  handleAddToWatchlist, handleRemoveFromWatchlist, watc
               movieObj={movie}
               poster_path={movie.poster_path}
               name={movie.original_title}
-              year={new Date(movie.release_date).getFullYear()}
+              year={movie.release_date}
               handleAddToWatchlist={handleAddToWatchlist}
               handleRemoveFromWatchlist={handleRemoveFromWatchlist}
               watchlist={watchlist}
@@ -47,8 +47,8 @@ function TopRatedMovies({  handleAddToWatchlist, handleRemoveFromWatchlist, watc
           </SwiperSlide>
         ))}
       </Swiper>
-    </section>
+    </div>
   )
 }
 
-export default TopRatedMovies
+export default UpcomingMovies

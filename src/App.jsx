@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Banner from "./components/Banner";
 import TopRatedMovies from "./components/TopRatedMovies";
 import PopularMovies from "./pages/PopularMovies";
+import UpcomingMovies from "./components/UpcomingMovies";
 
 function App() {
   const [watchlist, setWatchlist] = useState([]);
@@ -46,6 +47,7 @@ function App() {
                 <Banner />
                 <Movies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
                 <TopRatedMovies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
+                <UpcomingMovies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
               </>
             }
           />
