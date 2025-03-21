@@ -6,18 +6,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import axios from "axios";
 import { Star, CalendarDays } from "lucide-react";
+import useFetch from "../hooks/useFetch";
 
 const Banner = () => {
-  const [movies, setMovies] = useState([]);
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const TRENDING_URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
-
-  useEffect(() => {
-    axios.get(TRENDING_URL).then((res) => {
-      setMovies(res.data.results);
-    }
-    );
-  }, []);
+  const { data: movies, loading, error } = useFetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`);
 
   return (
     <div className="w-full max-w-5xl mx-auto mt-16">
@@ -32,6 +25,9 @@ const Banner = () => {
         loop={movies.length > 1}
         className="rounded-lg custom-swiper"
       >
+        {loading && <p className="text-white text-center col-span-full">Loading...</p>}
+        {error && <p className="text-red-500 text-center col-span-full">{error}</p>}
+        {!loading && !error && movies && movies.length === 0 && <p className="text-white text-center col-span-full">No Movies available</p>}
         {movies.map((movie) => (
           <SwiperSlide key={movie.id}>
             <div className="relative h-[500px] rounded-lg overflow-hidden">

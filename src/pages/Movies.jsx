@@ -11,8 +11,6 @@ function Movies({
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   const { data: movies, loading, error } = useFetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
-  if(loading) return <p className='text-white text-center'>Loading...</p>
-  if(error) return <p className='text-red-500 text-center'>{error}</p>
   
   return (
     <>
@@ -20,6 +18,9 @@ function Movies({
         <h5 className="text-white font-semibold md:text-xl text-lg text-left">Popular Movies</h5>
       </div>
       <div className="grid lg:grid-cols-8 md:grid-cols-6 grid-cols-3 gap-2 lg:gap-4 p-4 place-items-center">
+        {loading && <p className="text-white text-center col-span-full">Loading...</p>}
+        {error && <p className="text-red-500 text-center col-span-full">{error}</p>}
+        {!loading && !error && movies && movies.length === 0 && <p className="text-white text-center col-span-full">No Movies available</p>}
         {movies.map((movieObj) => (
           <div key={movieObj.id} className="mb-4">
             <MovieCard

@@ -11,9 +11,6 @@ function TrendingTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatc
   const API_KEY = import.meta.env.VITE_API_KEY;
   const { data: tvShows, loading, error } = useFetch(`https://api.themoviedb.org/3/trending/tv/week?api_key=${API_KEY}`);
 
-  if(loading) return <p className='text-white text-center'>Loading...</p>
-  if(error) return <p className='text-red-500 text-center'>{error}</p>
-
   return (
     <div className='mt-2 p-2'>
       <h3 className='text-white font-semibold md:text-xl text-lg text-left'>Trending TV Shows</h3>
@@ -33,6 +30,9 @@ function TrendingTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatc
         }}
         className='rounded-lg mt-2'
       >
+        {loading && <p className='text-white text-center col-span-full'>Loading...</p>}
+        {error && <p className='text-red-500 text-center col-span-full'>{error}</p>}
+        {!loading && !error && tvShows && tvShows.length === 0 && <p className='text-white text-center col-span-full'>No TV Shows available</p>}
         {tvShows.map((tvShow) => (
           <SwiperSlide key={tvShow.id}>
             <TVShowsCard 
