@@ -10,6 +10,7 @@ import PopularMovies from "./pages/PopularMovies";
 import UpcomingMovies from "./components/UpcomingMovies";
 import TrendingTVShows from "./components/TrendingTVShows";
 import PopularTVShows from "./components/PopularTVShows";
+import TVShows from "./pages/TVShows";
 
 function App() {
   const [watchlist, setWatchlist] = useState([]);
@@ -56,6 +57,7 @@ function App() {
             }
           />
           <Route path="/popular" element={ <PopularMovies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} /> } />
+          <Route path="/tvshows" element={ <TVShows watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} /> } />
           <Route path="/watchlist" element={ <WatchList watchlist={watchlist} setWatchlist={setWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} /> } />
         </Routes>
       </BrowserRouter>

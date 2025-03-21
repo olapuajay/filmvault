@@ -21,6 +21,7 @@ function Navbar() {
       <div className="hidden md:flex gap-6">
         <Link className="hover:text-sky-500 transition duration-300" to="/">Home</Link>
         <Link className="hover:text-sky-500 transition duration-300" to="/popular">Popular</Link>
+        <Link className="hover:text-sky-500 transition duration-300" to="/tvshows">TV Shows</Link>
         <Link className="hover:text-sky-500 transition duration-300" to="/watchlist">Watchlist</Link>
       </div>
 
@@ -40,6 +41,7 @@ function Navbar() {
         </Link>
         <Link className="text-gray-300 text-lg" to="/" onClick={handleNav}>Home</Link>
         <Link className="text-gray-300 text-lg" to="/popular" onClick={handleNav}>Popular</Link>
+        <Link className="text-gray-300 text-lg" to="/tvshows" onClick={handleNav}>TV Shows</Link>
         <Link className="text-gray-300 text-lg" to="/watchlist" onClick={handleNav}>Watchlist</Link>
       </div>
     </nav>

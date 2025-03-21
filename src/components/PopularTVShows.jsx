@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import useFetch from '../hooks/useFetch';
 import TVShowsCard from './TVShowsCard';
+import { Link } from 'react-router-dom';
 
 function PopularTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) {
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -46,6 +47,13 @@ function PopularTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatch
             />
           </SwiperSlide>
         ))}
+        <SwiperSlide>
+          <Link to="/tvshows">
+            <div className=" mt-2 rounded-lg overflow-hidden w-full md:h-[250px] h-150px flex items-center justify-center text-white bg-gray-800 hover:scale-105 transition-transform duration-300">
+              <span className="text-center">View More</span>
+            </div>
+          </Link>
+        </SwiperSlide>
       </Swiper>
     </div>
   )
