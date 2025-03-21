@@ -20,11 +20,11 @@ function MovieCard({ movieObj, poster_path, name, handleAddToWatchlist, handleRe
           {
             doesExist(movieObj) ? (
               <button onClick={() => handleRemoveFromWatchlist(movieObj)} className="flex justify-center items-center absolute top-0 right-0 text-red-600 bg-gray-800 p-1 rounded-bl-lg">
-                <X />
+                <X strokeWidth={3} />
               </button>
             ) : (
               <button onClick={() => handleAddToWatchlist(movieObj)} className="flex justify-center items-center absolute top-0 right-0 text-sky-600 bg-gray-800 p-1 rounded-bl-lg">
-                <PlusIcon />
+                <PlusIcon strokeWidth={3} />
               </button>
             )
           }
