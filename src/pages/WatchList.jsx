@@ -98,9 +98,11 @@ function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
                 }
               })
               .filter((movieObj) => {
-                return movieObj.title
-                  .toLowerCase()
-                  .includes(search.toLowerCase());
+                return (
+                  (movieObj.title && movieObj.title.toLowerCase().includes(search.toLowerCase())) || 
+                  (movieObj.name && movieObj.name.toLowerCase().includes(search.toLowerCase())
+                  )
+                ) 
               })
               .map((movieObj) => {
                 return (
@@ -111,11 +113,11 @@ function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
                         alt="Movie Poster"
                         className="w-16 h-24 rounded-lg"
                       />
-                      <p className="text-gray-300"> {movieObj.title} </p>
+                      <p className="text-gray-300"> {movieObj.title || movieObj.name} </p>
                     </td>
                     <td className="text-center text-gray-300 px-4 py-2"> {movieObj.vote_average} </td>
                     <td className="text-center text-gray-300 px-4 py-2"> {movieObj.popularity} </td>
-                    <td className="text-center text-gray-300 px-4 py-2"> {genreIds[movieObj.genre_ids[0]]} </td>
+                    <td className="text-center text-gray-300 px-4 py-2"> {genreIds[movieObj.genre_ids?.[0]]} </td>
                     <td
                       onClick={() => handleRemoveFromWatchlist(movieObj)}
                       className="text-red-500 cursor-pointer px-4 py-2"

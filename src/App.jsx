@@ -8,6 +8,7 @@ import Banner from "./components/Banner";
 import TopRatedMovies from "./components/TopRatedMovies";
 import PopularMovies from "./pages/PopularMovies";
 import UpcomingMovies from "./components/UpcomingMovies";
+import TrendingTVShows from "./components/TrendingTVShows";
 
 function App() {
   const [watchlist, setWatchlist] = useState([]);
@@ -48,6 +49,7 @@ function App() {
                 <Movies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
                 <TopRatedMovies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
                 <UpcomingMovies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
+                <TrendingTVShows watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
               </>
             }
           />
