@@ -13,7 +13,7 @@ function PopularTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatch
   const { data: tvShows, loading,  error } = useFetch(`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=1`);
 
   return (
-    <div className='pt-0 p-2'>
+    <div className='mt-2 p-2'>
       <h3 className='text-white font-semibold md:text-xl text-lg text-left'>Popular TV Shows</h3>
       <Swiper 
         modules={[Navigation, Autoplay]}

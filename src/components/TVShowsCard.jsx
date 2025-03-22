@@ -27,7 +27,7 @@ function TVShowsCard({ tvShowsObj, poster_path, name, year, handleAddToWatchlist
           </button>
         )}
       </div>
-      <div className='text-gray-300 md:text-sm text-xs px-2 pt-2 flex justify-items-start'>
+      <div className='text-gray-300 md:text-sm text-xs px-2 pt-2 flex justify-items-start truncate'>
         {name.length > 10 ? name.slice(0, 10) + '...' : name}
       </div>
       <div className='text-sky-600 md:text-sm text-xs px-2 pt-2 flex justify-items-start'>
