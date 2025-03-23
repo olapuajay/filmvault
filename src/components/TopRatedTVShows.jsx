@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -6,10 +6,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import useFetch from '../hooks/useFetch';
 import TVShowsCard from './TVShowsCard';
+import DetailsModal from './DetailsModal';
 
 function TopRatedTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const { data: tvshows, loading, error } = useFetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=en-US&page=1`);
+
+  const [selectedItem, setSelectedItem] = useState(null);
   return (
     <div className='mt-2 p-2'>
       <h3 className='text-white font-semibold md:text-xl text-xl text-left'>Top Rated TV Shows</h3>
@@ -33,7 +36,7 @@ function TopRatedTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatc
         {error && <p className='text-red-500 text-center col-span-full'>{error}</p>}
         {!loading && !error && tvshows && tvshows.length === 0 && <p className="text-white text-center col-span-full">No TV Shows available</p>}
         {tvshows && tvshows.map((tvshow) => (
-          <SwiperSlide key={tvshow.id}>
+          <SwiperSlide key={tvshow.id} className='cursor-pointer' onClick={() => setSelectedItem(tvshow)}>
             <TVShowsCard 
               tvShowsObj={tvshow}
               poster_path={tvshow.poster_path}
@@ -46,6 +49,7 @@ function TopRatedTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatc
           </SwiperSlide>
         ))}
       </Swiper>
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
     </div>
   )
 }

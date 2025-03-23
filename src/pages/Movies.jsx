@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import MovieCard from "../components/MovieCard";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
+import DetailsModal from "../components/DetailsModal";
 
 function Movies({
   handleAddToWatchlist,
@@ -11,6 +12,8 @@ function Movies({
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   const { data: movies, loading, error } = useFetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
+
+  const [selectedItem, setSelectedItem] = useState(null);
   
   return (
     <>
@@ -22,7 +25,7 @@ function Movies({
         {error && <p className="text-red-500 text-center col-span-full">{error}</p>}
         {!loading && !error && movies && movies.length === 0 && <p className="text-white text-center col-span-full">No Movies available</p>}
         {movies.map((movieObj) => (
-          <div key={movieObj.id} className="mb-4">
+          <div key={movieObj.id} className="mb-4 cursor-pointer" onClick={() => setSelectedItem(movieObj)}>
             <MovieCard
               movieObj={movieObj}
               poster_path={movieObj.poster_path}
@@ -41,6 +44,7 @@ function Movies({
           </Link>
         </div>
       </div>
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -7,10 +7,12 @@ import 'swiper/css/pagination';
 import useFetch from '../hooks/useFetch';
 import TVShowsCard from './TVShowsCard';
 import { Link } from 'react-router-dom';
+import DetailsModal from './DetailsModal';
 
 function PopularTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const { data: tvShows, loading,  error } = useFetch(`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=1`);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   return (
     <div className='mt-2 p-2'>
@@ -35,7 +37,7 @@ function PopularTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatch
         {error && <p className='text-red-500 text-center col-span-full'>{error}</p>}
         {!loading && !error && tvShows && tvShows.length === 0 && <p className='text-white text-center col-span-full'>No TV Shows available</p>}
         {tvShows.map((tvShow) => (
-          <SwiperSlide key={tvShow.id}>
+          <SwiperSlide key={tvShow.id} className='cursor-pointer' onClick={() => setSelectedItem(tvShow)}>
             <TVShowsCard 
               tvShowsObj={tvShow}
               poster_path={tvShow.poster_path}
@@ -55,6 +57,7 @@ function PopularTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatch
           </Link>
         </SwiperSlide>
       </Swiper>
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
     </div>
   )
 }

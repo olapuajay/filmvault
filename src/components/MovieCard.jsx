@@ -10,7 +10,7 @@ function MovieCard({ movieObj, poster_path, name, handleAddToWatchlist, handleRe
       }
     }
     return false
-  } 
+  }
 
   return (
     <>

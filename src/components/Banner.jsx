@@ -1,16 +1,27 @@
-import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import axios from "axios";
-import { Star, CalendarDays } from "lucide-react";
+import { Star, CalendarDays, Plus, X } from "lucide-react";
 import useFetch from "../hooks/useFetch";
+import { useState } from "react";
+import DetailsModal from "./DetailsModal";
 
-const Banner = () => {
+const Banner = ({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) => {
+
+  const doesExist = (movieObj) => {
+    for(let i = 0; i < watchlist.length; i++) {
+      if(watchlist[i].id == movieObj.id) {
+        return true
+      }
+    }
+    return false
+  }
+
   const API_KEY = import.meta.env.VITE_API_KEY;
   const { data: movies, loading, error } = useFetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   return (
     <div className="w-full max-w-5xl mx-auto mt-16">
@@ -30,7 +41,7 @@ const Banner = () => {
         {!loading && !error && movies && movies.length === 0 && <p className="text-white text-center col-span-full">No Movies available</p>}
         {movies.map((movie) => (
           <SwiperSlide key={movie.id}>
-            <div className="relative h-[500px] rounded-lg overflow-hidden">
+            <div className="relative h-[500px] rounded-lg overflow-hidden cursor-pointer" onClick={() => setSelectedItem(movie)}>
               <img
                 src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                 alt={movie.title}
@@ -41,7 +52,7 @@ const Banner = () => {
                 <p className="text-gray-300 text-lg max-w-2xl mb-4 ml-2 hidden sm:block">
                   {movie.overview.length > 150 ? movie.overview.slice(0, 150) + "..." : movie.overview}
                 </p>
-                <div className="flex items-center space-x-4 text-gray-300 ml-2 md:mb-0 mb-8">
+                <div className="flex items-center space-x-4 text-gray-300 ml-2">
                   <span className="bg-orange-500 px-3 py-1 text-white font-bold rounded-md flex items-center gap-1">
                     <Star size={16} />
                     {movie.vote_average.toFixed(1)}
@@ -51,11 +62,22 @@ const Banner = () => {
                     {movie.release_date}
                   </span>
                 </div>
+                {doesExist(movie) ? (
+                  <button onClick={() => handleRemoveFromWatchlist(movie)} className="bg-red-600 px-4 py-2 text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 md:mb-0 mb-8">
+                    <X size={24} /> Remove from Watchlist
+                  </button>
+                ) : (
+                  <button onClick={(() => handleAddToWatchlist(movie))} className="bg-sky-600 px-4 py-2 text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 md:mb-0 mb-8">
+                    <Plus size={24} /> Add to Watchlist
+                  </button>
+                )}
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
     </div>
   );
 };

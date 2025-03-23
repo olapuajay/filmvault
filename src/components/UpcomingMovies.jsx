@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -6,10 +6,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import useFetch from '../hooks/useFetch';
 import TopRatedMovieCard from './TopRatedMovieCard';
+import DetailsModal from './DetailsModal';
 
 function UpcomingMovies({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const { data: movies, loading, error } = useFetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`);
+
+  const [selectedItem, setSelectedItem] = useState(null);
 
   return (
     <div className='mt-2 p-2'>
@@ -34,7 +37,7 @@ function UpcomingMovies({ watchlist, handleAddToWatchlist, handleRemoveFromWatch
         {error && <p className='text-red-500 text-center col-span-full'>{error}</p>}
         {!loading && !error && movies && movies.length === 0 && <p className="text-white text-center col-span-full">No Movies available</p>}
         {movies.map((movie) => (
-          <SwiperSlide key={movie.id}>
+          <SwiperSlide key={movie.id} className='cursor-pointer' onClick={() => setSelectedItem(movie)}>
             <TopRatedMovieCard
               movieObj={movie}
               poster_path={movie.poster_path}
@@ -47,6 +50,7 @@ function UpcomingMovies({ watchlist, handleAddToWatchlist, handleRemoveFromWatch
           </SwiperSlide>
         ))}
       </Swiper>
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
     </div>
   )
 }

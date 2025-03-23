@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import useFetch from '../hooks/useFetch'
 import Pagination from '../components/Pagination';
 import MovieCard from '../components/MovieCard';
+import DetailsModal from '../components/DetailsModal';
 
 function PopularMovies({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) {
   const [pageNumber, setPageNumber] = useState(1);
@@ -17,6 +18,7 @@ function PopularMovies({ watchlist, handleAddToWatchlist, handleRemoveFromWatchl
   }
   const API_KEY = import.meta.env.VITE_API_KEY;
   const { data: movies, loading, error } = useFetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   return (
     <>
@@ -28,7 +30,7 @@ function PopularMovies({ watchlist, handleAddToWatchlist, handleRemoveFromWatchl
         {error && <p className="text-red-500 text-center col-span-full">{error}</p>}
         {!loading && !error && movies && movies.length === 0 && <p className="text-white text-center col-span-full">No Movies available</p>}
         {movies.map((movieObj) => (
-          <div key={movieObj.id} className="mb-4">
+          <div key={movieObj.id} className="mb-4 cursor-pointer" onClick={() => setSelectedItem(movieObj)}>
             <MovieCard
               movieObj={movieObj}
               poster_path={movieObj.poster_path}
@@ -45,6 +47,7 @@ function PopularMovies({ watchlist, handleAddToWatchlist, handleRemoveFromWatchl
         handlePagePrev={handlePagePrev}
         handlePageNext={handlePageNext}
       />
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
     </>
   )
 }

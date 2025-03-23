@@ -28,7 +28,6 @@ function App() {
     });
     setWatchlist(filteredWatchlist);
     localStorage.setItem("watchlist", JSON.stringify(filteredWatchlist));
-    console.log(filteredWatchlist);
   };
 
   useEffect(() => {
@@ -48,7 +47,7 @@ function App() {
             path="/"
             element={
               <>
-                <Banner />
+                <Banner watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
                 <Movies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
                 <TopRatedMovies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
                 <UpcomingMovies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
