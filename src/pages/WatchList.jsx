@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import genreIds from "../utility/genre";
 import { ArrowDown, ArrowUp, Trash } from "lucide-react";
+import DetailsModal from "../components/DetailsModal";
 
 function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
   const [search, setSearch] = useState("");
   const [genreList, setGenreList] = useState(["All Genres"]);
   const [currGenre, setCurrGenre] = useState("All Genres");
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -106,7 +108,7 @@ function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
               })
               .map((movieObj) => {
                 return (
-                  <tr key={movieObj.id} className="border-b-2 border-gray-800 py-2">
+                  <tr key={movieObj.id} className="border-b-2 border-gray-800 py-2 cursor-pointer hover:bg-gray-950" onClick={() => setSelectedItem(movieObj)}>
                     <td className="flex items-center gap-2 my-2 px-4 py-2">
                       <img
                         src={`https://image.tmdb.org/t/p/original/${movieObj.poster_path}`}
@@ -130,6 +132,7 @@ function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
           </tbody>
         </table>
       </div>
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
     </div>
   );
 }

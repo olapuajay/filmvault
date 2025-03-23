@@ -1,13 +1,14 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Star, X } from 'lucide-react'
+import './DetailsModal.css'
 
 function DetailsModal({ item, onClose }) {
   if(!item) return null;
 
   return (
     <motion.div initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }} transition={{ type: "spring", stiffness: 100 }}
-      className='fixed bottom-0 left-0 right-0 bg-gray-900 text-white shadow-xl rounded-t-2xl p-4 md:p-6 max-h-[80vh] overflow-auto z-50'
+      className='fixed bottom-0 left-0 right-0 bg-gray-900 text-white shadow-xl rounded-t-2xl p-4 md:p-6 max-h-[80vh] overflow-auto z-50 custom-scrollbar'
     >
       <div className='flex justify-between items-center'>
         <h2 className='text-lg md:text-xl font-semibold'>
@@ -28,9 +29,12 @@ function DetailsModal({ item, onClose }) {
           <p className='mt-2 text-sm'>
             <strong>Release Date: </strong> {item.release_date || item.first_air_date}
           </p>
-          <p className='mt-1 text-sm'>
-            <strong>Rating: </strong> {item.vote_average} <Star size={16} className='text-yellow-400' />
-          </p>
+          <div className='mt-1 text-sm flex gap-1'>
+            <strong>Rating: </strong> 
+            <div className='flex items-center gap-1'>
+              {item.vote_average} <Star size={16} className='text-yellow-400 inline' />
+            </div>
+          </div>
           <p className='mt-1 text-sm'>
             <strong>Popularity: </strong> {item.popularity}
           </p>
