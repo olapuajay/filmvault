@@ -44,7 +44,7 @@ function Movies({
           </Link>
         </div>
       </div>
-      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />}
     </>
   );
 }

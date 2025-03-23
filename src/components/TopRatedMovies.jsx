@@ -50,7 +50,7 @@ function TopRatedMovies({  handleAddToWatchlist, handleRemoveFromWatchlist, watc
           </SwiperSlide>
         ))}
       </Swiper>
-      {seletedItem && <DetailsModal item={seletedItem} onClose={() => setSelectedItem(null)} />}
+      {seletedItem && <DetailsModal item={seletedItem} onClose={() => setSelectedItem(null)} watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />}
     </section>
   )
 }

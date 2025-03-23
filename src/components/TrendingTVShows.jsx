@@ -50,7 +50,7 @@ function TrendingTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatc
           </SwiperSlide>
         ))}
       </Swiper>
-      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />}
     </div>
   )
 }

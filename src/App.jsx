@@ -59,7 +59,7 @@ function App() {
           />
           <Route path="/popular" element={ <PopularMovies watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} /> } />
           <Route path="/tvshows" element={ <TVShows watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} /> } />
-          <Route path="/watchlist" element={ <WatchList watchlist={watchlist} setWatchlist={setWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} /> } />
+          <Route path="/watchlist" element={ <WatchList watchlist={watchlist} setWatchlist={setWatchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} /> } />
         </Routes>
       </BrowserRouter>
     </>

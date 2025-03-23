@@ -53,22 +53,22 @@ const Banner = ({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) 
                   {movie.overview.length > 150 ? movie.overview.slice(0, 150) + "..." : movie.overview}
                 </p>
                 <div className="flex items-center space-x-4 text-gray-300 ml-2">
-                  <span className="bg-orange-500 px-3 py-1 text-white font-bold rounded-md flex items-center gap-1">
+                  <span className="bg-orange-500 px-3 py-1 text-sm md:text-lg text-white font-bold rounded-md flex items-center gap-1">
                     <Star size={16} />
                     {movie.vote_average.toFixed(1)}
                   </span>
-                  <span className="bg-gray-800 px-3 py-1 text-white rounded-md font-bold flex items-center gap-1">
+                  <span className="bg-gray-800 px-3 py-1 text-sm md:text-lg text-white rounded-md font-bold flex items-center gap-1">
                     <CalendarDays size={16} />
                     {movie.release_date}
                   </span>
                 </div>
                 {doesExist(movie) ? (
-                  <button onClick={() => handleRemoveFromWatchlist(movie)} className="bg-red-600 px-4 py-2 text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 md:mb-0 mb-8">
-                    <X size={24} /> Remove from Watchlist
+                  <button onClick={() => handleRemoveFromWatchlist(movie)} className="bg-red-600 px-4 py-2 text-sm text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 md:mb-0 mb-8">
+                    <X size={20} strokeWidth={3} /> Remove from Watchlist
                   </button>
                 ) : (
-                  <button onClick={(() => handleAddToWatchlist(movie))} className="bg-sky-600 px-4 py-2 text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 md:mb-0 mb-8">
-                    <Plus size={24} /> Add to Watchlist
+                  <button onClick={(() => handleAddToWatchlist(movie))} className="bg-sky-600 px-4 py-2 text-sm text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 md:mb-0 mb-8">
+                    <Plus size={20} strokeWidth={3} /> Add to Watchlist
                   </button>
                 )}
               </div>
@@ -77,7 +77,7 @@ const Banner = ({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) 
         ))}
       </Swiper>
 
-      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />}
     </div>
   );
 };

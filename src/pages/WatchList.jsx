@@ -3,7 +3,7 @@ import genreIds from "../utility/genre";
 import { ArrowDown, ArrowUp, Trash } from "lucide-react";
 import DetailsModal from "../components/DetailsModal";
 
-function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
+function WatchList({ watchlist, setWatchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) {
   const [search, setSearch] = useState("");
   const [genreList, setGenreList] = useState(["All Genres"]);
   const [currGenre, setCurrGenre] = useState("All Genres");
@@ -132,7 +132,7 @@ function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
           </tbody>
         </table>
       </div>
-      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />}
     </div>
   );
 }

@@ -42,7 +42,7 @@ function TVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist })
         ))}
       </div>
       <Pagination pageNumber={pageNumber} handlePagePrev={handlePagePrev} handlePageNext={handlePageNext} />
-      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
+      {selectedItem && <DetailsModal item={selectedItem} onClose={() => setSelectedItem(null)} watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />}
     </div>
   )
 }

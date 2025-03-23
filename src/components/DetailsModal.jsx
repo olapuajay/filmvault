@@ -1,10 +1,19 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Star, X } from 'lucide-react'
+import { Plus, Star, X } from 'lucide-react'
 import './DetailsModal.css'
 
-function DetailsModal({ item, onClose }) {
+function DetailsModal({ item, onClose, watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) {
   if(!item) return null;
+
+  const doesExist = (movieObj) => {
+    for(let i = 0; i < watchlist.length; i++) {
+      if(watchlist[i].id == movieObj.id) {
+        return true
+      }
+    }
+    return false
+  }
 
   return (
     <motion.div initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }} transition={{ type: "spring", stiffness: 100 }}
@@ -38,6 +47,17 @@ function DetailsModal({ item, onClose }) {
           <p className='mt-1 text-sm'>
             <strong>Popularity: </strong> {item.popularity}
           </p>
+          <div className='mt-2'>
+            {doesExist(item) ? (
+              <button onClick={() => handleRemoveFromWatchlist(item)} className='bg-red-500 text-white font-semibold px-4 py-2 text-sm rounded-lg flex items-center gap-1 w-max'>
+                <X size={20} strokeWidth={3} /> Remove from Watchlist
+              </button>
+            ) : (
+              <button onClick={() => handleAddToWatchlist(item)} className='bg-sky-600 text-white font-semibold px-4 py-2 text-sm rounded-lg flex items-center gap-1 w-max'>
+                <Plus size={20} strokeWidth={3} /> Add to Watchlist
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </motion.div>
