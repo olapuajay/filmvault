@@ -3,6 +3,7 @@ import MovieCard from "../components/MovieCard";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import DetailsModal from "../components/DetailsModal";
+import { div } from "framer-motion/client";
 
 function Movies({
   handleAddToWatchlist,
@@ -21,7 +22,11 @@ function Movies({
         <h5 className="text-white font-semibold md:text-xl text-lg text-left">Popular Movies</h5>
       </div>
       <div className="grid lg:grid-cols-8 md:grid-cols-6 grid-cols-3 gap-2 lg:gap-4 p-4 place-items-center">
-        {loading && <p className="text-white text-center col-span-full">Loading...</p>}
+        {loading && Array.from({ length: 20 }).map((_, index) => (
+          <div key={index} className="rounded-lg overflow-hidden md:h-40 md:w-24 bg-gray-800 h-32 w-20 mb-4 animate-pulse">
+            <div className="w-full h-full bg-gray-800 animate-pulse"></div>
+          </div>
+        ))}
         {error && <p className="text-red-500 text-center col-span-full">{error}</p>}
         {!loading && !error && movies && movies.length === 0 && <p className="text-white text-center col-span-full">No Movies available</p>}
         {movies.map((movieObj) => (

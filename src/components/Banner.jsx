@@ -36,7 +36,22 @@ const Banner = ({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) 
         loop={movies.length > 1}
         className="rounded-lg custom-swiper"
       >
-        {loading && <p className="text-white text-center col-span-full">Loading...</p>}
+        {loading && (
+          <SwiperSlide>
+            <div className="relative h-[500px] rounded-lg overflow-hidden animate-pulse">
+              <div className="w-full h-full bg-gray-800 animate-pulse"></div>
+              <div className="absolute inset-0 flex flex-col justify-end px-10 bg-gradient-to-r from-black/70 via-black/50 to-transparent">
+                <div className="h-8 bg-gray-700 rounded w-3/4 mb-2 ml-2"></div>
+                <div className="h-6 bg-gray-700 rounded w-1/2 mb-4 ml-2"></div>
+                <div className="flex items-center space-x-4 text-gray-300 ml-2">
+                  <div className="h-6 bg-gray-700 rounded w-16"></div>
+                  <div className="h-6 bg-gray-700 rounded w-24"></div>
+                </div>
+                <div className="h-8 bg-gray-700 rounded w-1/4 mt-2 mb-8 ml-2"></div>
+              </div>
+            </div>
+          </SwiperSlide>
+        )}
         {error && <p className="text-red-500 text-center col-span-full">{error}</p>}
         {!loading && !error && movies && movies.length === 0 && <p className="text-white text-center col-span-full">No Movies available</p>}
         {movies.map((movie) => (
@@ -47,7 +62,7 @@ const Banner = ({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) 
                 alt={movie.title}
                 className="w-full h-full object-cover brightness-75"
               />
-              <div className="absolute inset-0 flex flex-col md:justify-center justify-end px-10 bg-gradient-to-r from-black/70 via-black/50 to-transparent">
+              <div className="absolute inset-0 flex flex-col justify-end px-10 bg-gradient-to-r from-black/70 via-black/50 to-transparent">
                 <h2 className="text-white md:text-3xl text-2xl font-bold mb-2 ml-2">{movie.title}</h2>
                 <p className="text-gray-300 text-lg max-w-2xl mb-4 ml-2 hidden sm:block">
                   {movie.overview.length > 150 ? movie.overview.slice(0, 150) + "..." : movie.overview}
@@ -63,11 +78,11 @@ const Banner = ({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) 
                   </span>
                 </div>
                 {doesExist(movie) ? (
-                  <button onClick={() => handleRemoveFromWatchlist(movie)} className="bg-red-600 px-4 py-2 text-sm text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 md:mb-0 mb-8">
+                  <button onClick={() => handleRemoveFromWatchlist(movie)} className="bg-red-600 px-4 py-2 text-sm text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 mb-8">
                     <X size={20} strokeWidth={3} /> Remove from Watchlist
                   </button>
                 ) : (
-                  <button onClick={(() => handleAddToWatchlist(movie))} className="bg-sky-600 px-4 py-2 text-sm text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 md:mb-0 mb-8">
+                  <button onClick={(() => handleAddToWatchlist(movie))} className="bg-sky-600 px-4 py-2 text-sm text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 mb-8">
                     <Plus size={20} strokeWidth={3} /> Add to Watchlist
                   </button>
                 )}

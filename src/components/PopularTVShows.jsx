@@ -33,7 +33,11 @@ function PopularTVShows({ watchlist, handleAddToWatchlist, handleRemoveFromWatch
         }}
         className='rounded-lg mt-2'
       >
-        {loading && <p className='text-white text-center col-span-full'>Loading...</p>}
+        {loading && Array.from({ length: 20 }).map((_, index) => (
+          <SwiperSlide key={index} className='rounded-lg overflow-hidden bg-gray-800 h-32 w-20 mb-4 animate-pulse'>
+            <div className='w-full md:h-[250px] h-[150px] bg-gray-800 animate-pulse'></div>
+          </SwiperSlide>
+        ))}
         {error && <p className='text-red-500 text-center col-span-full'>{error}</p>}
         {!loading && !error && tvShows && tvShows.length === 0 && <p className='text-white text-center col-span-full'>No TV Shows available</p>}
         {tvShows.map((tvShow) => (
