@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Movielogo from "../assets/movielogo.png";
 import { Link } from "react-router-dom";
 import { AlignJustify, X } from "lucide-react";
+import SearchComponent from "./SearchComponent";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
@@ -16,6 +17,8 @@ function Navbar() {
       <Link to="/">
         <img src={Movielogo} alt="LOGO" className="h-10 w-10" />
       </Link>
+
+      <SearchComponent />
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex gap-6">
