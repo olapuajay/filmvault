@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react'
+import { Search, X } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import DetailsModal from './DetailsModal'
@@ -26,8 +26,12 @@ function SearchComponent({ watchlist, handleAddToWatchlist, handleRemoveFromWatc
     }
   };
 
+  const handleClear = () => {
+    setQuery('');
+    setResults([]);
+  }
   return (
-    <div className="md:w-full w-14 max-w-sm min-w-[180px]">
+    <div className="lg:w-full w-14 max-w-sm min-w-[180px]">
       <form onSubmit={(e) => e.preventDefault()} className="relative flex items-center">
         <input
           type="text"
@@ -36,18 +40,24 @@ function SearchComponent({ watchlist, handleAddToWatchlist, handleRemoveFromWatc
           className="w-full bg-transparent placeholder:text-gray-300 text-white text-sm border border-gray-300 rounded-md pl-3 pr-16 py-2 transition duration-300 ease focus:outline-none focus:border-white hover:border-sky-600 shadow-sm focus:shadow"
           placeholder="Search" 
         />
-        <button type='submit' className="absolute right-3 text-gray-300">
-          <Search size={20} />
-        </button>
+        {query ? (
+          <button type="button" className="absolute right-3 text-gray-300" onClick={handleClear}>
+            <X size={20} />
+          </button>
+        ) : (
+          <button type="submit" className="absolute right-3 text-gray-300">
+            <Search size={20} />
+          </button>
+        )}
       </form>
 
       {results.length > 0 && (
-        <ul className='absolute top-full left-0 w-full bg-gray-800 text-white mt-1 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto'>
+        <ul className='absolute top-full md:w-full w-14 max-w-sm min-w-[180px] bg-gray-800 text-white mt-1 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto'>
           {results.map((item) => (
             <li
               key={item.id}
               className='p-2 border-b border-gray-700 hover:bg-gray-700 cursor-pointer transition'
-              onClick={() => setSelectedItem(item)}
+              onClick={() => (setSelectedItem(item) || setQuery(''))}
             >
               {item.title || item.name}
             </li>

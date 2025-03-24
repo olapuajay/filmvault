@@ -4,14 +4,9 @@ import { ArrowDown, ArrowUp, Trash } from "lucide-react";
 import DetailsModal from "../components/DetailsModal";
 
 function WatchList({ watchlist, setWatchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) {
-  const [search, setSearch] = useState("");
   const [genreList, setGenreList] = useState(["All Genres"]);
   const [currGenre, setCurrGenre] = useState("All Genres");
   const [selectedItem, setSelectedItem] = useState(null);
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
 
   const handleFilter = (genre) => {
     setCurrGenre(genre);
@@ -58,21 +53,13 @@ function WatchList({ watchlist, setWatchlist, handleAddToWatchlist, handleRemove
           );
         })}
       </div>
-      <div className="text-center mx-auto my-4">
-        <input
-          onChange={handleSearch}
-          value={search}
-          type="text"
-          className="p-2 rounded-xl md:w-1/2 border-2 border-gray-300 bg-gray-800 text-white active:outline-none focus:outline-none"
-          placeholder="Search Movies"
-        />
-      </div>
+  
       <div>
         {watchlist.length === 0 && (
           <div className="text-center text-gray-300 text-lg">No Movies in Watchlist</div> 
         )}
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mt-4">
         <table className="table-auto text-white mx-auto min-w-full">
           <thead>
             <tr>
@@ -99,13 +86,6 @@ function WatchList({ watchlist, setWatchlist, handleAddToWatchlist, handleRemove
                   return genreIds[movieObj.genre_ids[0]] == currGenre;
                 }
               })
-              .filter((movieObj) => {
-                return (
-                  (movieObj.title && movieObj.title.toLowerCase().includes(search.toLowerCase())) || 
-                  (movieObj.name && movieObj.name.toLowerCase().includes(search.toLowerCase())
-                  )
-                ) 
-              })
               .map((movieObj) => {
                 return (
                   <tr key={movieObj.id} className="border-b-2 border-gray-800 py-2 cursor-pointer hover:bg-gray-950" onClick={() => setSelectedItem(movieObj)}>
@@ -121,7 +101,7 @@ function WatchList({ watchlist, setWatchlist, handleAddToWatchlist, handleRemove
                     <td className="text-center text-gray-300 px-4 py-2"> {movieObj.popularity} </td>
                     <td className="text-center text-gray-300 px-4 py-2"> {genreIds[movieObj.genre_ids?.[0]]} </td>
                     <td
-                      onClick={() => handleRemoveFromWatchlist(movieObj)}
+                      onClick={(e) => {e.stopPropagation(); handleRemoveFromWatchlist(movieObj);}}
                       className="text-red-500 cursor-pointer px-4 py-2"
                     >
                       <Trash size={20} />
