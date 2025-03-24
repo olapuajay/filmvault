@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AlignJustify, X } from "lucide-react";
 import SearchComponent from "./SearchComponent";
 
-function Navbar() {
+function Navbar({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) {
   const [nav, setNav] = useState(false);
   
   const handleNav = () => {
@@ -18,7 +18,7 @@ function Navbar() {
         <img src={Movielogo} alt="LOGO" className="h-10 w-10" />
       </Link>
 
-      <SearchComponent />
+      <SearchComponent watchlist={watchlist} handleAddToWatchlist={handleAddToWatchlist} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex gap-6">
