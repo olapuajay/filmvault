@@ -1,8 +1,9 @@
 import { PlusIcon, X } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 function MovieCard({ movieObj, poster_path, name, handleAddToWatchlist, handleRemoveFromWatchlist, watchlist }) {
 
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const doesExist = (movieObj) => {
     for(let i = 0; i < watchlist.length; i++) {
       if(watchlist[i].id == movieObj.id) {
@@ -15,8 +16,16 @@ function MovieCard({ movieObj, poster_path, name, handleAddToWatchlist, handleRe
   return (
     <>
       <div className="">
-        <div className="movie-card relative rounded-lg overflow-hidden md:h-40 md:w-24 bg-cover bg-center h-32 w-20 hover:scale-105 transition-transform duration-300" 
-        style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${poster_path})`}}>
+        <div className="movie-card relative rounded-lg overflow-hidden md:h-40 md:w-24 bg-cover bg-center h-32 w-20 hover:scale-105 transition-transform duration-300">
+          {!isImageLoaded && (
+            <div className="absolute inset-0 bg-gray-800 animate-pulse"></div>
+          )}
+          <img 
+            src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+            alt={name}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isImageLoaded ? "opacity-100" : "opacity-0"}`}
+            onLoad={() => setIsImageLoaded(true)}
+          />
           {
             doesExist(movieObj) ? (
               <button onClick={() => handleRemoveFromWatchlist(movieObj)} className="flex justify-center items-center absolute top-0 right-0 text-red-600 bg-gray-800 p-1 rounded-bl-lg">
