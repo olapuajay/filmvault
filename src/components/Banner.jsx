@@ -79,11 +79,11 @@ const Banner = ({ watchlist, handleAddToWatchlist, handleRemoveFromWatchlist }) 
                 </div>
                 {doesExist(movie) ? (
                   <button onClick={() => handleRemoveFromWatchlist(movie)} className="bg-red-600 px-4 py-2 text-sm text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 mb-8">
-                    <X size={20} strokeWidth={3} /> Remove from Watchlist
+                    <X size={20} strokeWidth={3} /> Remove
                   </button>
                 ) : (
                   <button onClick={(() => handleAddToWatchlist(movie))} className="bg-sky-600 px-4 py-2 text-sm text-white font-semibold rounded-md flex items-center gap-1 w-max ml-2 mt-2 mb-8">
-                    <Plus size={20} strokeWidth={3} /> Add to Watchlist
+                    <Plus size={20} strokeWidth={3} /> Watchlist
                   </button>
                 )}
               </div>
